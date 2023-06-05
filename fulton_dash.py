@@ -106,9 +106,9 @@ year_built_dict = {
 # sub-geography slider
 geography_included = st.sidebar.radio(
     'Geography included:',
-    ('Entire county','Sub-geography'),
+    ('Entire county','City/Region'),
     index=0,
-    # help='Filter sales by location. Defaults to entire county. "Sub-geography" filter will allow multi-select of smaller groupings within the county.'
+    # help='Filter sales by location. Defaults to entire county. "City/Region" filter will allow multi-select of smaller groupings within the county.'
 )
 
 sub_geos_list = [
@@ -128,9 +128,9 @@ sub_geos_list = [
     ]
 
 sub_geo = ""
-if geography_included == 'Sub-geography':
+if geography_included == 'City/Region':
     sub_geo = st.sidebar.multiselect(
-        'Select one or more regions:',
+        'Select one or more cities/regions:',
         sub_geos_list,
         ['Buckhead'],
         # help="Select one or more pre-defined groupings of Census tracts."
@@ -221,7 +221,7 @@ def filter_data():
     filtered_df = df[(df['year_blt'] >= lower_bound) & (df['year_blt'] <= upper_bound)]
 
     # filter by sub-geography (if applicable)
-    if geography_included == 'Sub-geography':
+    if geography_included == 'City/Region':
         filtered_df = filtered_df[filtered_df['Sub_geo'].isin(sub_geo)]
 
     # year filter
@@ -324,7 +324,7 @@ def mapper_2D():
     tooltip = {
             "html": "Median price per SF: <b>{price_sf_formatted}</b><br>\
                     Total sales: <b>{total_sales}</b><br>\
-                    Sub-geometry: <b>{Sub-geo}</b>",
+                    City/Region: <b>{Sub-geo}</b>",
             "style": {"background": "rgba(2,43,58,0.7)", 
                       "border": "1px solid white", 
                       "color": "white", 
@@ -406,7 +406,7 @@ def mapper_3D():
     tooltip = {
             "html": "Median price per SF: <b>{price_sf_formatted}</b><br>\
                     Total sales: <b>{total_sales}</b><br>\
-                    Sub-geometry: <b>{Sub-geo}</b>",
+                    City/Region: <b>{Sub-geo}</b>",
             "style": {"background": "rgba(2,43,58,0.7)", 
                       "border": "1px solid white", 
                       "color": "white", 
