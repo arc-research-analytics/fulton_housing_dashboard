@@ -63,7 +63,7 @@ years = st.sidebar.select_slider(
     2022,
     2023
     ],
-    value=(2020,2022),
+    value=(2020,2023),
     # help='Filter sales by transaction year.'
 )
 
@@ -179,7 +179,7 @@ st.sidebar.markdown("<p style='text-align:center;'>ARC Research & Analytics Depa
 @st.cache_data
 def load_tab_data():
     # load the data
-    df = pd.read_csv('Fulton_18-22.csv', thousands=',', keep_default_na=False)
+    df = pd.read_csv('Fulton_18-23.csv', thousands=',', keep_default_na=False)
 
     df = df[[
         'Square Ft',
@@ -596,7 +596,7 @@ else:
 # map notes
 if map_view == '2D':
     expander = st.expander("Notes")
-    expander.markdown(f"<span style='color:#022B3A'> Darker shades of Census tracts on map represent higher sales prices per SF for the selected time period. Dashboard excludes non-qualified, non-market, and bulk transactions. Excludes transactions below $1,000, homes smaller than 75 square feet, and transactions with missing values. Data downloaded from {county_var} County public records on June 5, 2023, and is assumed to be accurate and reliable.</span>", unsafe_allow_html=True)
+    expander.markdown(f"<span style='color:#022B3A'> Darker shades of Census tracts on map represent higher sales prices per SF for the selected time period. Dashboard excludes non-qualified, non-market, and bulk transactions. Excludes transactions below $1,000, homes smaller than 75 square feet, and transactions with missing values. Data downloaded from {county_var} County public records on June 5, 2023 and is assumed to be accurate and reliable.</span>", unsafe_allow_html=True)
 else:
     expander = st.expander("Notes")
     expander.markdown(f"<span style='color:#022B3A'>Census tract 'height' representative of total sales per tract. Darker shades of Census tracts on map represent higher sales prices per SF for the selected time period. Dashboard excludes non-qualified, non-market, and bulk transactions. Excludes transactions below $1,000, homes smaller than 75 square feet, and transactions with missing values. Data downloaded from {county_var} County public records on May 11, 2023 and is assumed to be accurate and reliable.</span>", unsafe_allow_html=True)
