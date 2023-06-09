@@ -54,7 +54,7 @@ st.sidebar.markdown(f"<p style='text-align:center;color:#FFFFFF;font-style:itali
 
 # all the years available for selection
 years = st.sidebar.select_slider(
-    'Transaction year:',
+    'Transaction year',
     options=[
     2018,
     2019,
@@ -91,7 +91,7 @@ st.write("")
 
 # construction vintage
 year_built = st.sidebar.select_slider(
-    'Year built:',
+    'Year built',
     options=['<2000', '2000-2010', '2011-2023'],
     value=('<2000', '2011-2023'),
     # help="Filter sales by the construction vintage of the home."
@@ -105,7 +105,7 @@ year_built_dict = {
 
 # sub-geography slider
 geography_included = st.sidebar.radio(
-    'Geography included:',
+    'Geography included',
     ('Entire county','City/Region'),
     index=0,
     # help='Filter sales by location. Defaults to entire county. "City/Region" filter will allow multi-select of smaller groupings within the county.'
@@ -140,7 +140,7 @@ if geography_included == 'City/Region':
 st.sidebar.write("---")
 st.sidebar.markdown(f"<p style='text-align:center; color:#FFFFFF; font-style:italic; line-height:2px'>Map options:</p>", unsafe_allow_html=True)
 map_view = st.sidebar.radio(
-        'Map view:',
+        'Map view',
         ('2D', '3D'),
         index=0,
         horizontal=True,
@@ -148,7 +148,7 @@ map_view = st.sidebar.radio(
         )
 
 base_map = st.sidebar.selectbox(
-    'Base map:',
+    'Base map',
     ('Streets', 'Satellite', 'Gray'),
     index=2,
     # help='Change underlying base map.'
