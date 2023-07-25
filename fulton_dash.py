@@ -187,13 +187,15 @@ def load_tab_data():
         'year_blt',
         'price_sf',
         'salePrice_numeric',
-        'GEOID',
         'Sub_geo',
         'unique_ID', 
         'year', 
         'month', 
         'year-month'
         ]]
+    
+    # drop the duplicates that show up in the data
+    df = df.drop_duplicates(subset='unique_ID')
     
 
     # return this item
@@ -234,8 +236,8 @@ def filter_data():
         df_KPI_delta0 = pd.DataFrame({'price_sf':[100]}) # create dummy dataframes in the case that the transaction year sliders are superimposed
         df_KPI_delta1 = pd.DataFrame({'price_sf':[200]})
 
-    # now group by GEOID
-    grouped_df = filtered_df_map_KPI.groupby('GEOID').agg({
+    # now group by sub geography
+    grouped_df = filtered_df_map_KPI.groupby('Sub_geo').agg({
         'price_sf':'median',
         'salePrice_numeric':'median',
         'year_blt':'median',
@@ -257,29 +259,32 @@ custom_colors = [tuple(int(h.lstrip('#')[i:i+2], 16) for i in (0, 2, 4)) for h i
 
 # map variables
 map_lat_2D = 33.84552225888502
-map_lat_3D = 34.08769453341557
+map_lat_3D = 34.978
 map_long = -84.45
 map_height = 330
 map_zoom_2D = 8.0 # higher numeric value = 'zooming in'
-map_zoom_3D = 7.5 # higher numeric value = 'zooming in'
+map_zoom_3D = 6 # higher numeric value = 'zooming in'
 
 def mapper_2D():
 
     # tabular data
     df = filter_data()[1]
-    df['GEOID'] = df['GEOID'].astype(str)
+    # df['GEOID'] = df['GEOID'].astype(str)
 
     # read in geospatial
-    gdf = gpd.read_file('Geography/Fulton_CTs_GEOID_simp.gpkg')
+    gdf = gpd.read_file('Geography/Fulton_neighborhoods.gpkg')
 
     # join together the 2, and let not man put asunder
-    joined_df = gdf.merge(df, left_on='GEOID', right_on='GEOID')
+    joined_df = gdf.merge(df, left_on='Sub-geo', right_on='Sub_geo')
 
     # ensure we're working with a geodataframe
     joined_df = gpd.GeoDataFrame(joined_df)
 
     # format the column to show the price / SF
     joined_df['price_sf_formatted'] = joined_df['price_sf'].apply(lambda x: "${:.0f}".format((x)))
+
+    # format the column to show the overall price
+    joined_df['price_formatted'] = joined_df['salePrice_numeric'].apply(lambda x: "${:,.0f}".format((x)))
 
     # add 1,000 separator to column that will show total sales
     joined_df['total_sales'] = joined_df['unique_ID'].apply(lambda x: '{:,}'.format(x))
@@ -322,6 +327,7 @@ def mapper_2D():
 
     tooltip = {
             "html": "Median price per SF: <b>{price_sf_formatted}</b><br>\
+                    Median price: <b>{price_formatted}</b><br>\
                     Total sales: <b>{total_sales}</b><br>\
                     City/Region: <b>{Sub-geo}</b>",
             "style": {"background": "rgba(2,43,58,0.7)", 
@@ -345,13 +351,13 @@ def mapper_3D():
 
     # tabular data
     df = filter_data()[1]
-    df['GEOID'] = df['GEOID'].astype(str)
+    # df['GEOID'] = df['GEOID'].astype(str)
 
     # read in geospatial
-    gdf = gpd.read_file('Geography/Fulton_CTs_GEOID_simp.gpkg')
+    gdf = gpd.read_file('Geography/Fulton_neighborhoods.gpkg')
 
     # join together the 2, and let not man put asunder
-    joined_df = gdf.merge(df, left_on='GEOID', right_on='GEOID')
+    joined_df = gdf.merge(df, left_on='Sub-geo', right_on='Sub_geo')
 
     # ensure we're working with a geodataframe
     joined_df = gpd.GeoDataFrame(joined_df)
@@ -378,7 +384,7 @@ def mapper_3D():
         longitude=map_long, 
         zoom=map_zoom_3D, 
         max_zoom=15, 
-        min_zoom=8,
+        min_zoom=5,
         pitch=45,
         bearing=0,
         height=map_height
