@@ -179,7 +179,7 @@ st.sidebar.markdown("<p style='text-align:center;'>ARC Research & Analytics Depa
 @st.cache_data
 def load_tab_data():
     # load the data
-    df = pd.read_csv('Fulton_18-23.csv', thousands=',', keep_default_na=False)
+    df = pd.read_csv('Fulton_18-23_v2.csv', thousands=',', keep_default_na=False)
 
     df = df[[
         'Square Ft',
