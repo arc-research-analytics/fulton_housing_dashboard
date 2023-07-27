@@ -601,7 +601,7 @@ else:
 # map notes
 if map_view == '2D':
     expander = st.expander("Notes")
-    expander.markdown(f"<span style='color:#022B3A'> Darker shades of Census tracts on map represent higher sales prices per SF for the selected time period. Dashboard excludes non-qualified, non-market, and bulk transactions. Excludes transactions below $1,000, homes smaller than 75 square feet, and transactions with missing values. Data downloaded from {county_var} County public records on June 5, 2023 and is assumed to be accurate and reliable.</span>", unsafe_allow_html=True)
+    expander.markdown(f"<span style='color:#022B3A'> Darker shades of Census tracts on map represent higher sales prices per SF for the selected time period. Dashboard excludes non-qualified, non-market, and bulk transactions. Excludes transactions below $1,000, homes smaller than 75 square feet, and transactions with missing values. Data downloaded from {county_var} County public records on July 24, 2023, and is assumed to be accurate and reliable.</span>", unsafe_allow_html=True)
 else:
     expander = st.expander("Notes")
     expander.markdown(f"<span style='color:#022B3A'>Census tract 'height' representative of total sales per tract. Darker shades of Census tracts on map represent higher sales prices per SF for the selected time period. Dashboard excludes non-qualified, non-market, and bulk transactions. Excludes transactions below $1,000, homes smaller than 75 square feet, and transactions with missing values. Data downloaded from {county_var} County public records on May 11, 2023 and is assumed to be accurate and reliable.</span>", unsafe_allow_html=True)
