@@ -558,7 +558,7 @@ if map_view == '2D':
     st.pydeck_chart(mapper_2D(), use_container_width=True)
 else:
     st.pydeck_chart(mapper_3D(), use_container_width=True)
-    st.markdown("<span style='color:#022B3A'>Census tract 'height' represents total sales; darker shading represents greater median sales price / SF.</span>", unsafe_allow_html=True)
+    st.markdown("<span style='color:#022B3A'>City/Region 'height' represents total sales; darker shading represents greater median sales price / SF.</span>", unsafe_allow_html=True)
 
 # chart
 st.plotly_chart(charter(), use_container_width=True, config = {'displayModeBar': False})
