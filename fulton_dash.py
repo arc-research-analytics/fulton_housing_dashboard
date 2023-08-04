@@ -144,7 +144,7 @@ map_view = st.sidebar.radio(
         ('2D', '3D'),
         index=0,
         horizontal=True,
-        # help='Toggle 3D view for extruded polygons which show "height" based on the quantity of total sales in each Census tract subject to the filters chosen. Shift + click to change pitch and rotation of map. Darker Census tract shading corresponds to higher median sales price per SF.'
+        help='Toggle 3D view to extrude map polygons showing "height" based on total quantity of home sales for the selected filters.'
         )
 
 base_map = st.sidebar.selectbox(
