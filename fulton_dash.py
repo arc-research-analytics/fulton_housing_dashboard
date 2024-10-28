@@ -176,6 +176,7 @@ st.sidebar.write("")
 st.sidebar.markdown("<p style='text-align:center;'>ARC Research & Analytics Department</p>", unsafe_allow_html=True)
 
 # sidebar variables ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 @st.cache_data
 def load_tab_data():
     # load the data
@@ -608,7 +609,7 @@ if map_view == '2D':
     expander.markdown(f"<span style='color:#022B3A'> Darker shades of Census tracts on map represent higher sales prices per SF for the selected time period. Dashboard excludes non-qualified, non-market, and bulk transactions. Excludes transactions below $1,000, homes smaller than 75 square feet, and transactions with missing values. Data downloaded from {county_var} County public records on July 24, 2023, and is assumed to be accurate and reliable.</span>", unsafe_allow_html=True)
 else:
     expander = st.expander("Notes")
-    expander.markdown(f"<span style='color:#022B3A'>Census tract 'height' representative of total sales per tract. Darker shades of Census tracts on map represent higher sales prices per SF for the selected time period. Dashboard excludes non-qualified, non-market, and bulk transactions. Excludes transactions below $1,000, homes smaller than 75 square feet, and transactions with missing values. Data downloaded from {county_var} County public records on May 11, 2023 and is assumed to be accurate and reliable.</span>", unsafe_allow_html=True)
+    expander.markdown(f"<span style='color:#022B3A'>Census tract 'height' representative of total sales per tract. Darker shades of Census tracts on map represent higher sales prices per SF for the selected time period. Dashboard excludes non-qualified, non-market, and bulk transactions. Excludes transactions below $1,000, homes smaller than 75 square feet, and transactions with missing values. Data downloaded from {county_var} County public records on July 24, 2023 and is assumed to be accurate and reliable.</span>", unsafe_allow_html=True)
 
 # Draw ARC logo at the bottom of the page
 im = Image.open('content/logo.png')
